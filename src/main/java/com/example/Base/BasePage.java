@@ -5,6 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 public abstract class BasePage <T extends BasePage <T>>{
 
@@ -98,10 +99,35 @@ public abstract class BasePage <T extends BasePage <T>>{
     protected boolean isVisible(By locator) {
         return findElementVisibility(locator).isDisplayed();
     }
+    protected List<WebElement> findElementsPresence(By locator) {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
 
+    protected List<WebElement> findElementsVisibility(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+    protected String getTextInside(WebElement parent, By childLocator) {
+        return findInside(parent, childLocator).getText().trim();
+    }
 
-
-
+    protected WebElement findInside(WebElement parent, By childLocator) {
+        return wait.until(driver -> parent.findElement(childLocator));
+    }
+    protected boolean existsInside(WebElement parent, By childLocator) {
+        try {
+            parent.findElement(childLocator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+    protected boolean isEmpty(By locator) {
+        WebElement el = findElementVisibility(locator);
+        String value = el.getTagName().equalsIgnoreCase("input") || el.getTagName().equalsIgnoreCase("textarea")
+                ? el.getAttribute("value")
+                : el.getText();
+        return value == null || value.isEmpty();
+    }
 
 
 }

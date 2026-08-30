@@ -17,19 +17,15 @@ public class DriverSetUp {
 
             System.setProperty(
                     "webdriver.chrome.driver",
-                    "C:\\Users\\parsian\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"
-            );
+                    "C:\\Users\\parsian\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 
             ChromeOptions options = new ChromeOptions();
 
             options.addArguments(
                     "--incognito",
-                    "--disable-notifications"
-            );
+                    "--disable-notifications");
 
             driver = new ChromeDriver(options);
-
-            driver.manage().window().maximize();
         }
 
         return driver;

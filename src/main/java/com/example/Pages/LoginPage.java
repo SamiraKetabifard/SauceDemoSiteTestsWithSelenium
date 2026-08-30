@@ -13,7 +13,6 @@ public class LoginPage extends BasePage<LoginPage> {
     private By loginCredentials = By.cssSelector("[data-test='login-credentials']");
     private By passwordCredentials = By.cssSelector("[data-test='login-password']");
     private By errorMessage = By.cssSelector("[data-test='error']");
-
     private By inventoryContainer = By.id("inventory_container");
 
     public LoginPage(WebDriver driver) {
