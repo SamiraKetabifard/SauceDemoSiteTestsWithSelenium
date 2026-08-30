@@ -28,6 +28,9 @@ public abstract class BasePage <T extends BasePage <T>>{
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return (T) this;
     }
+    protected List<WebElement> findElementsVisibility(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
     //WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
     //driver.findElement(locator)+wait
     //Find the element and wait until it exists in the page
@@ -38,6 +41,9 @@ public abstract class BasePage <T extends BasePage <T>>{
     protected T waitUntilElementPresence(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         return (T) this;
+    }
+    protected List<WebElement> findElementsPresence(By locator) {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
     //WebElement element = driver.findElement(By.id("user-name"));
     //element.clear();
@@ -93,23 +99,15 @@ public abstract class BasePage <T extends BasePage <T>>{
     protected String getText(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText().trim();
     }
+    protected String getTextInside(WebElement parent, By childLocator) {
+        return findInside(parent, childLocator).getText().trim();
+    }
     //protected boolean isVisible(By locator) {
     //    WebElement element = driver.findElement(locator);
     //    return element.isDisplayed();}
     protected boolean isVisible(By locator) {
         return findElementVisibility(locator).isDisplayed();
     }
-    protected List<WebElement> findElementsPresence(By locator) {
-        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-    }
-
-    protected List<WebElement> findElementsVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-    }
-    protected String getTextInside(WebElement parent, By childLocator) {
-        return findInside(parent, childLocator).getText().trim();
-    }
-
     protected WebElement findInside(WebElement parent, By childLocator) {
         return wait.until(driver -> parent.findElement(childLocator));
     }
@@ -123,11 +121,10 @@ public abstract class BasePage <T extends BasePage <T>>{
     }
     protected boolean isEmpty(By locator) {
         WebElement el = findElementVisibility(locator);
-        String value = el.getTagName().equalsIgnoreCase("input") || el.getTagName().equalsIgnoreCase("textarea")
+        String value = el.getTagName().equalsIgnoreCase("input") ||
+                el.getTagName().equalsIgnoreCase("textarea")
                 ? el.getAttribute("value")
                 : el.getText();
         return value == null || value.isEmpty();
     }
-
-
 }
