@@ -11,7 +11,7 @@ public abstract class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        driver = DriverSetUp.getDriver("chrome");
+        driver = DriverSetUp.getDriver();
     }
 
     @AfterMethod(alwaysRun = true)
