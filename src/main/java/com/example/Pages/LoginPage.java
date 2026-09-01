@@ -18,7 +18,6 @@ public class LoginPage extends BasePage<LoginPage> {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
     public LoginPage open() {
         driver.get("https://www.saucedemo.com/");
         waitUntilElementVisibility(usernameField);
@@ -41,33 +40,29 @@ public class LoginPage extends BasePage<LoginPage> {
         return usernamesSplit[1];
     }
     /* Split and last element access is because of dom structure.
-     * First element is `Password for all users:` text */
+    First element is `Password for all users:` text */
     public String getCorrectPassword() {
         var password = getText(passwordCredentials);
         String[] passwordSplit = password.split("\n");
         return passwordSplit[passwordSplit.length - 1];
     }
-
     public LoginPage writeUsername(String username) {
         sendKeys(usernameField, username);
         return this;
     }
-
     public LoginPage writePassword(String password) {
         sendKeys(passwordField, password);
         return this;
     }
-
-    public HomePage loginHappyPath() {
-        writeUsername(getCorrectUsername());
-        writePassword(getCorrectPassword());
-        return clickLoginButtonExpectingSuccess();
-    }
-
     public HomePage clickLoginButtonExpectingSuccess() {
         click(loginButton);
         waitUntilElementPresence(inventoryContainer);
         return new HomePage(driver);
+    }
+    public HomePage loginHappyPath() {
+        writeUsername(getCorrectUsername());
+        writePassword(getCorrectPassword());
+        return clickLoginButtonExpectingSuccess();
     }
     public LoginPage clickLoginButtonRaw() {
         click(loginButton);
@@ -76,17 +71,13 @@ public class LoginPage extends BasePage<LoginPage> {
     public String getErrorMessage() {
         return getText(errorMessage).toLowerCase();
     }
-
     public boolean isUserNameFieldVisible() {
         return isVisible(usernameField);
     }
-
     public boolean isPasswordFieldVisible() {
         return isVisible(passwordField);
     }
-
     public boolean isLoginButtonVisible() {
         return isVisible(loginButton);
     }
 }
-

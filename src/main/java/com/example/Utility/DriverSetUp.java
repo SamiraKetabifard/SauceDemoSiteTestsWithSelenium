@@ -7,32 +7,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class DriverSetUp {
 
     private static WebDriver driver;
-
     private DriverSetUp() {
     }
-
     public static WebDriver getDriver() {
-
         if (driver == null) {
-
-            System.setProperty(
-                    "webdriver.chrome.driver",
+            System.setProperty("webdriver.chrome.driver",
                     "C:\\Users\\parsian\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
-
             ChromeOptions options = new ChromeOptions();
-
-            options.addArguments(
-                    "--incognito",
-                    "--disable-notifications");
-
+            options.addArguments("--incognito", "--disable-notifications");
             driver = new ChromeDriver(options);
         }
-
         return driver;
     }
-
     public static void quit() {
-
         if (driver != null) {
             driver.quit();
             driver = null;

@@ -99,6 +99,9 @@ public abstract class BasePage <T extends BasePage <T>>{
     protected String getText(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText().trim();
     }
+    protected WebElement findInside(WebElement parent, By childLocator) {
+        return wait.until(driver -> parent.findElement(childLocator));
+    }
     protected String getTextInside(WebElement parent, By childLocator) {
         return findInside(parent, childLocator).getText().trim();
     }
@@ -107,9 +110,6 @@ public abstract class BasePage <T extends BasePage <T>>{
     //    return element.isDisplayed();}
     protected boolean isVisible(By locator) {
         return findElementVisibility(locator).isDisplayed();
-    }
-    protected WebElement findInside(WebElement parent, By childLocator) {
-        return wait.until(driver -> parent.findElement(childLocator));
     }
     protected boolean existsInside(WebElement parent, By childLocator) {
         try {
