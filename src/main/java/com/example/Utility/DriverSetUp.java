@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class DriverSetUp {
 
     private static WebDriver driver;
+
     private DriverSetUp() {
     }
     public static WebDriver getDriver() {

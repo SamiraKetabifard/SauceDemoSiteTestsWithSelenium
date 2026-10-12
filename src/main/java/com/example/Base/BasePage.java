@@ -66,13 +66,13 @@ public abstract class BasePage <T extends BasePage <T>>{
     //Find the element by its locator, then scroll to it smoothly
     protected T scrollToElementSmooth(By locator) {
         var element = findElementPresence(locator);
-        ((JavascriptExecutor) driver).executeScript
+        ((JavascriptExecutor)driver).executeScript
                 ("arguments[0].scrollIntoView({behavior: 'smooth'});", element);
         return (T) this;
     }
     //Scroll smoothly to an element that is already found
     protected T scrollToElementSmooth(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript
+        ((JavascriptExecutor)driver).executeScript
                 ("arguments[0].scrollIntoView({behavior: 'smooth'});", element);
         return (T) this;
     }
@@ -123,8 +123,7 @@ public abstract class BasePage <T extends BasePage <T>>{
         WebElement el = findElementVisibility(locator);
         String value = el.getTagName().equalsIgnoreCase("input") ||
                 el.getTagName().equalsIgnoreCase("textarea")
-                ? el.getAttribute("value")
-                : el.getText();
+                ? el.getAttribute("value") : el.getText();
         return value == null || value.isEmpty();
     }
 }

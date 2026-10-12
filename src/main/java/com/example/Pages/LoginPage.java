@@ -30,9 +30,7 @@ public class LoginPage extends BasePage<LoginPage> {
     public List<String> getAcceptedUsernames() {
         var usernames = getText(loginCredentials);
         var usernamesSplit = usernames.split("\n");
-        return Arrays.stream(usernamesSplit)
-                .toList()
-                .subList(1, usernamesSplit.length);
+        return Arrays.stream(usernamesSplit).toList().subList(1, usernamesSplit.length);
     }
     public String getCorrectUsername(){
         var usernames = getText(loginCredentials);

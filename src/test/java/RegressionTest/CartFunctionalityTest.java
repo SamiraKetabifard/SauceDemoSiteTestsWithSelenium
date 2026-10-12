@@ -18,29 +18,22 @@ public class CartFunctionalityTest extends BaseTest {
     @Description("Cart badge should display correct count when items are added to cart.")
     public void cartBadgeShowsCorrectCount() {
         var loginPage = new LoginPage(driver);
-        var homePage = loginPage.open()
-                .loginHappyPath();
-
+        var homePage = loginPage.open().loginHappyPath();
         // Add 2 products to cart
         var product1 = homePage.getFirstProduct();
         homePage.clickAddToCartButton(product1);
-
         // Wait for badge to appear after first item
         Assert.assertTrue(homePage.hasCartBadge(), "Cart badge should appear after first item.");
-
         // Get second product (ensure it's different from first)
         var products = homePage.getProducts();
         var product2 = products.size() > 1 ? products.get(1) : products.get(0);
-
         // Make sure product2 is different from product1, or skip if same
         if (product1 != product2) {
             homePage.clickAddToCartButton(product2);
         }
-
         // Verify cart badge is visible and shows correct count
         Assert.assertTrue(homePage.hasCartBadge(), "Cart badge should be visible after adding items.");
         String badgeCount = homePage.getCartBadgeCount();
-
         // Verify badge shows correct count (1 if same product, 2 if different)
         int expectedCount = (product1 == product2) ? 1 : 2;
         Assert.assertEquals(badgeCount, String.valueOf(expectedCount),
@@ -53,8 +46,7 @@ public class CartFunctionalityTest extends BaseTest {
     @Description("Cart badge count should increase when adding multiple items.")
     public void cartBadgeIncrementsCorrectly() {
         var loginPage = new LoginPage(driver);
-        var homePage = loginPage.open()
-                .loginHappyPath();
+        var homePage = loginPage.open().loginHappyPath();
 
         // Add first product and verify badge appears with count 1
         var product1 = homePage.getFirstProduct();
@@ -84,31 +76,24 @@ public class CartFunctionalityTest extends BaseTest {
     @Description("Cart badge should not appear when cart is empty.")
     public void cartBadgeNotVisibleWhenEmpty() {
         var loginPage = new LoginPage(driver);
-        var homePage = loginPage.open()
-                .loginHappyPath();
-
+        var homePage = loginPage.open().loginHappyPath();
         // Verify cart badge is not visible initially
         Assert.assertFalse(homePage.hasCartBadge(), "Cart badge should not be visible when cart is empty.");
     }
-
     @Test(groups = "regression")
     @Story("Shopping cart functionality")
     @Severity(SeverityLevel.NORMAL)
     @Description("Remove button should appear after adding item to cart.")
     public void removeButtonAppearsAfterAddToCart() {
         var loginPage = new LoginPage(driver);
-        var homePage = loginPage.open()
-                .loginHappyPath();
+        var homePage = loginPage.open().loginHappyPath();
 
         var product = homePage.getFirstProduct();
-
         // Verify remove button not visible initially
         Assert.assertFalse(homePage.isProductHasRemoveFromCartButton(product),
                 "Remove button should not be visible before adding to cart.");
-
         // Add to cart
         homePage.clickAddToCartButton(product);
-
         // Verify remove button is now visible
         Assert.assertTrue(homePage.isProductHasRemoveFromCartButton(product),
                 "Remove button should be visible after adding to cart.");

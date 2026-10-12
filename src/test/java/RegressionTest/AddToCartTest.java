@@ -17,30 +17,23 @@ public class AddToCartTest extends BaseTest {
     @Description("User should be able to add item to cart.")
     public void loginAndClickAddToCartForRandomItem() {
         var loginPage = new LoginPage(driver);
-        var homePage = loginPage.open()
-                .loginHappyPath();
-
+        var homePage = loginPage.open().loginHappyPath();
         // Verify user is on home page
         Assert.assertTrue(homePage.atHomePage(), "Home page should be opened.");
-
         // Add random product to cart
         var product = homePage.getRandomProduct();
         homePage.clickAddToCartButton(product);
-
         // Verify product is added (remove button should appear)
         Assert.assertTrue(homePage.isProductHasRemoveFromCartButton(product),
                 String.format("Product %s is not added to the cart.", product));
     }
-
     @Test(groups = "regression")
     @Story("Add to cart functionality")
     @Severity(SeverityLevel.NORMAL)
     @Description("Add to cart button works for all products.")
     public void clickingAddToCartButtonWorks() {
         var loginPage = new LoginPage(driver);
-        var homePage = loginPage.open()
-                .loginHappyPath();
-
+        var homePage = loginPage.open().loginHappyPath();
         // Add each product to cart and verify button changes
         homePage.getProducts().forEach(product -> {
             homePage.clickAddToCartButton(product);
