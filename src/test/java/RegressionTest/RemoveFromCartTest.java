@@ -30,7 +30,6 @@ public class RemoveFromCartTest extends BaseTest {
         Assert.assertTrue(homePage.isProductHasAddToCartButton(product),
                 "Add to cart button should appear after removing item.");
     }
-
     @Test(groups = "regression")
     @Story("Remove from cart functionality")
     @Severity(SeverityLevel.NORMAL)
@@ -48,7 +47,6 @@ public class RemoveFromCartTest extends BaseTest {
         // Verify badge disappears
         Assert.assertFalse(homePage.hasCartBadge(), "Cart badge should disappear when cart is empty.");
     }
-
     @Test(groups = "regression")
     @Story("Remove from cart functionality")
     @Severity(SeverityLevel.NORMAL)
@@ -59,20 +57,15 @@ public class RemoveFromCartTest extends BaseTest {
         // Add two products to cart
         var product1 = homePage.getFirstProduct();
         homePage.clickAddToCartButton(product1);
-
         var product2 = homePage.getSecondProduct();
         homePage.clickAddToCartButton(product2);
-
         // Verify badge shows 2 items
         Assert.assertEquals(homePage.getCartBadgeCount(), "2", "Cart should show 2 items.");
-
         // Remove one item from cart
         homePage.clickRemoveFromCartButton(product1);
-
         // Verify badge count decreases to 1
         Assert.assertEquals(homePage.getCartBadgeCount(), "1", "Cart should show 1 item after removing one.");
     }
-
     @Test(groups = "regression")
     @Story("Remove from cart functionality")
     @Severity(SeverityLevel.NORMAL)

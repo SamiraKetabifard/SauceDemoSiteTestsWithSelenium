@@ -31,7 +31,6 @@ public class SortNamesTest extends BaseTest {
                             titlesAfter.get(i), titlesAfter.get(i + 1)));
         }
     }
-
     @Test(groups = "regression")
     @Story("Product sorting functionality")
     @Severity(SeverityLevel.NORMAL)

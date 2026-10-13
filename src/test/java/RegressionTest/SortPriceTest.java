@@ -25,14 +25,12 @@ public class SortPriceTest extends BaseTest {
         for (int i = 0; i < pricesAfter.size() - 1; i++) {
             double currentPrice = homePage.parsePrice(pricesAfter.get(i));
             double nextPrice = homePage.parsePrice(pricesAfter.get(i + 1));
-
             // Each price should be less than or equal to the next price
             Assert.assertTrue(currentPrice <= nextPrice,
                     String.format("Prices should be in ascending order. %s should be <= %s",
                             pricesAfter.get(i), pricesAfter.get(i + 1)));
         }
     }
-
     @Test(groups = "regression")
     @Story("Product sorting functionality")
     @Severity(SeverityLevel.NORMAL)
@@ -47,7 +45,6 @@ public class SortPriceTest extends BaseTest {
         for (int i = 0; i < pricesAfter.size() - 1; i++) {
             double currentPrice = homePage.parsePrice(pricesAfter.get(i));
             double nextPrice = homePage.parsePrice(pricesAfter.get(i + 1));
-
             // Each price should be greater than or equal to the next price
             Assert.assertTrue(currentPrice >= nextPrice,
                     String.format("Prices should be in descending order. %s should be >= %s",

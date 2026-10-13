@@ -39,7 +39,6 @@ public class CartFunctionalityTest extends BaseTest {
         Assert.assertEquals(badgeCount, String.valueOf(expectedCount),
                 String.format("Cart badge should show %d item(s).", expectedCount));
     }
-
     @Test(groups = "regression")
     @Story("Shopping cart functionality")
     @Severity(SeverityLevel.CRITICAL)
@@ -47,20 +46,17 @@ public class CartFunctionalityTest extends BaseTest {
     public void cartBadgeIncrementsCorrectly() {
         var loginPage = new LoginPage(driver);
         var homePage = loginPage.open().loginHappyPath();
-
         // Add first product and verify badge appears with count 1
         var product1 = homePage.getFirstProduct();
         homePage.clickAddToCartButton(product1);
         Assert.assertTrue(homePage.hasCartBadge(), "Cart badge should appear after first item.");
         Assert.assertEquals(homePage.getCartBadgeCount(), "1", "Cart should show 1 item.");
-
         // Add second product (ensure it's different from first)
         var products = homePage.getProducts();
         if (products.size() > 1) {
             var product2 = products.get(1);
             homePage.clickAddToCartButton(product2);
             Assert.assertEquals(homePage.getCartBadgeCount(), "2", "Cart should show 2 items.");
-
             // Add third product if available and verify badge count increases to 3
             if (products.size() >= 3) {
                 var product3 = products.get(2);
@@ -69,7 +65,6 @@ public class CartFunctionalityTest extends BaseTest {
             }
         }
     }
-
     @Test(groups = "regression")
     @Story("Shopping cart functionality")
     @Severity(SeverityLevel.NORMAL)
@@ -87,7 +82,6 @@ public class CartFunctionalityTest extends BaseTest {
     public void removeButtonAppearsAfterAddToCart() {
         var loginPage = new LoginPage(driver);
         var homePage = loginPage.open().loginHappyPath();
-
         var product = homePage.getFirstProduct();
         // Verify remove button not visible initially
         Assert.assertFalse(homePage.isProductHasRemoveFromCartButton(product),
